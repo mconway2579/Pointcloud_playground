@@ -1,0 +1,5 @@
+<launch>
+   <node name="dynamic_pc2" type="pc2_cube.py" pkg="pc_playground" output="screen"/>
+
+   <node pkg="rviz" type="rviz" name="rviz_thermal" args="-d $(find pc_playground)/rviz/dynamic_pc2.rviz"/>
+</launch>

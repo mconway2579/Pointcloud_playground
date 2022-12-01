@@ -1,0 +1,2 @@
+pc_playground
+-DCATKIN_DEVEL_PREFIX=/home/max/pc_ws/devel -DCMAKE_INSTALL_PREFIX=/home/max/pc_ws/install -G Unix Makefiles
