@@ -55,8 +55,8 @@ if __name__ == "__main__":
     pub = rospy.Publisher("dynamic_pc2_topic", PointCloud2, queue_size=2)
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
-        depth_image_path = "/home/max/pc_ws/src/pc_playground/test_images/middlebury/teddy/disp6.png"
-        rgb_image_path = "/home/max/pc_ws/src/pc_playground/test_images/middlebury/teddy/im6.png"
+        depth_image_path = "/home/max/Pointcloud_playground/pc_ws/src/pc_playground/test_images/middlebury/teddy/disp6.png"
+        rgb_image_path = "/home/max/Pointcloud_playground/pc_ws/src/pc_playground/test_images/middlebury/teddy/im6.png"
         message = get_pc2_message_from_depth_and_rgb(depth_image_path,rgb_image_path)
         pub.publish(message)
         rate.sleep()
