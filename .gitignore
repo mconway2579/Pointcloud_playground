@@ -1,5 +1,4 @@
 build/
 devel/
 CLUBS/
-nsh_east/
-tum/
+*.bag
