@@ -13,6 +13,8 @@ from sensor_msgs import point_cloud2
 import cv2 as cv
 from shared import get_fields
 
+import math
+
 def get_points_from_depth_img_path(depth_image_path, z_start = 0, z_end_offset = 0, x_start = 0, x_end_offset = 0):
     depth_image = cv.imread(depth_image_path)
     gray = cv.cvtColor(depth_image, cv.COLOR_BGR2GRAY)
@@ -27,6 +29,8 @@ def get_points_from_depth_img(depth_image, z_start = 0, z_end_offset = 0, x_star
         for x in range(x_start, len(depth_image[z])-x_end_offset):
             x_coord = (len(depth_image[z]) - x) / len(depth_image[z])
             y_coord = (255-depth_image[z][x])/255
+            if math.isnan(y_coord):
+                y_coord = 0
 
             r = int(x_coord * 255.0)
             g = int(y_coord * 255.0)

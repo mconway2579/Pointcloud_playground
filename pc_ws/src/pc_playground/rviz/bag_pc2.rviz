@@ -85,20 +85,20 @@ Visualization Manager:
       Channel Name: intensity
       Class: rviz/PointCloud2
       Color: 255; 255; 255
-      Color Transformer: ""
+      Color Transformer: RGB8
       Decay Time: 0
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Min Color: 0; 0; 0
       Name: PointCloud2
-      Position Transformer: ""
+      Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.009999999776482582
       Style: Flat Squares
-      Topic: /out_points
+      Topic: /dynamic_pc2_topic
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -147,9 +147,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.3353980779647827
+      Pitch: 0.2053980678319931
       Target Frame: <Fixed Frame>
-      Yaw: 0.7853980660438538
+      Yaw: 1.4903974533081055
     Saved: ~
 Window Geometry:
   Displays:
