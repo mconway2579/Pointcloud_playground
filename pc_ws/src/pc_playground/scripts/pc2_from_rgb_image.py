@@ -12,11 +12,11 @@ from sensor_msgs import point_cloud2
 
 import cv2 as cv
 from shared import get_fields
-from pc2_from_image import get_points_from_depth_img
+from pc2_from_image import get_points_from_depth_img_path
 
 
 def color_depth_image(depth_image_path, rgb_image_path):
-    points = get_points_from_depth_img(depth_image_path, z_start = 0,
+    points = get_points_from_depth_img_path(depth_image_path, z_start = 0,
                                                         z_end_offset = 0,
                                                         x_start = 0,
                                                         x_end_offset = 0)
@@ -42,7 +42,7 @@ def color_depth_image(depth_image_path, rgb_image_path):
             point_index += 1
     return points
 
-def get_pc2_message_from_depth_and_rgb(depth_image_path, rgb_image_path):
+def get_pc2_message_from_depth_and_rgb_paths(depth_image_path, rgb_image_path):
     header = Header()
     header.frame_id = "map"
     points = color_depth_image(depth_image_path, rgb_image_path)
@@ -51,12 +51,13 @@ def get_pc2_message_from_depth_and_rgb(depth_image_path, rgb_image_path):
     return message
 
 if __name__ == "__main__":
+    import sys
     rospy.init_node("dynamic_pc2_node")
     pub = rospy.Publisher("dynamic_pc2_topic", PointCloud2, queue_size=2)
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
-        depth_image_path = "/home/max/Pointcloud_playground/pc_ws/src/pc_playground/test_images/middlebury/teddy/disp6.png"
-        rgb_image_path = "/home/max/Pointcloud_playground/pc_ws/src/pc_playground/test_images/middlebury/teddy/im6.png"
-        message = get_pc2_message_from_depth_and_rgb(depth_image_path,rgb_image_path)
+        depth_image_path = sys.argv[1]
+        rgb_image_path = sys.argv[2]
+        message = get_pc2_message_from_depth_and_rgb_paths(depth_image_path,rgb_image_path)
         pub.publish(message)
         rate.sleep()
