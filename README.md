@@ -23,16 +23,16 @@ experimenting with point-clouds in the ros ecosystem
 * take an Image message, change the frame_id field in the header, republish the message
 ### pc2_cube.py
 * creates a PointCloud2 message that displays a 3d array of points
-* ![point cloud cube]()
+* ![point cloud cube](/readme_images/pc_cube.png)
 ### pc2_from_image.py
 * given a depth map image create a point cloud from the depth map
-* ![depth image]()
-* ![point cloud]()
+* ![depth image](/readme_images/teddy_depth.png)
+* ![point cloud](/readme_images/teddy_depth_pc2.png)
 ### pc2_from_rgb_image.py
 * given a depth map image and an rgb image, overlay the two images into a pointcloud
-* ![depth image]()
-* ![rgb image]()
-* ![point cloud]()
+* ![depth image](/readme_images/teddy_depth.png)
+* ![rgb image](/readme_images/teddy_rgb.png)
+* ![point cloud](/readme_images/teddy_rgb_pc2.png)
 ### pc2_from_ros.py
 * given a depth image topic and an rgb image topic, overlay the two images into a pointcloud
 * ![depth image topic]()
