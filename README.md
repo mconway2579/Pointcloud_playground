@@ -1,5 +1,5 @@
 # Pointcloud_playground
-experimenting with point-clouds in the ros ecosystem
+experimenting with point-clouds to be displayed in rviz
 ## Launch Files
 ### pc2_color_from_image.launch
 * uses pc2-from_rgb_image.py to create a point cloud
@@ -35,8 +35,9 @@ experimenting with point-clouds in the ros ecosystem
 * ![point cloud](/readme_images/teddy_rgb_pc2.png)
 ### pc2_from_ros.py
 * given a depth image topic and an rgb image topic, overlay the two images into a pointcloud
-* ![depth image topic]()
-* ![rbg image topic]()
+* ![depth image topic](/readme_images/bag_depth.png)
+* ![rbg image topic](/readme_images/bag_rgb.png)
+* ![overlay](/readme_images/bag_pc2.png)
 
 
 
