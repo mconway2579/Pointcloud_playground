@@ -50,3 +50,5 @@ experimenting with point-clouds to be displayed in rviz
 * https://drive.google.com/file/d/19iRkS9xEVwJXkP0er7KT7YZxsu8fFcmw/view
 ### ros_examples
 * http://wiki.ros.org/depth_image_proc
+### NYU
+* https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html#raw_parts
