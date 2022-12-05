@@ -43,6 +43,10 @@ experimenting with point-clouds to be displayed in rviz
 
 ## Datasets
 ### depth_maps
+* contains various depth maps from the internet
 ### middlebury
+* https://vision.middlebury.edu/stereo/data/scenes2003/
 ### nsh_east
+* https://drive.google.com/file/d/19iRkS9xEVwJXkP0er7KT7YZxsu8fFcmw/view
 ### ros_examples
+* http://wiki.ros.org/depth_image_proc
