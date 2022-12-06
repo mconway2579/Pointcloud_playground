@@ -1,4 +1,11 @@
 build/
 devel/
-CLUBS/
 *.bag
+basement_0001a/
+basement_0001b/
+basement_0001c/
+basements.zip
+toolbox/
+*.mat
+*.mexa64
+toolbox_nyu_depth_v2.zip

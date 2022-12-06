@@ -1,8 +1,8 @@
 <launch>
    <node name="dynamic_pc2" type="pc2_from_rgb_image.py" pkg="pc_playground" output="screen"
      args="
-     /home/max/Pointcloud_playground/pc_ws/src/pc_playground/test_images/middlebury/teddy/disp6.png
-     /home/max/Pointcloud_playground/pc_ws/src/pc_playground/test_images/middlebury/teddy/im6.png"/>
+     /home/max/Pointcloud_playground/pc_ws/src/pc_playground/test_images/NYU/pairs/depth_1.pgm
+     /home/max/Pointcloud_playground/pc_ws/src/pc_playground/test_images/NYU/pairs/rgb_1.ppm"/>
 
    <node pkg="rviz" type="rviz" name="rviz_thermal" args="-d $(find pc_playground)/rviz/dynamic_pc2.rviz"/>
 </launch>
