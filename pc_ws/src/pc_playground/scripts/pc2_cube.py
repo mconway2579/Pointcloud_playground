@@ -1,21 +1,21 @@
 #!/usr/bin/env python
+"""a ros node that creates a pc2 message, when displayed will be a cube colored along axis"""
 import rospy
-import struct
 
 from roslib import message
 
-import sensor_msgs.point_cloud2 as pc2
-from sensor_msgs.msg import PointCloud2
-
 from std_msgs.msg import Header
+from sensor_msgs.msg import PointCloud2
 from sensor_msgs import point_cloud2
 
-import cv2 as cv
 import numpy as np
 
-from shared import get_fields
+from shared import get_fields, pack_colors
 
 def get_points_cube(num_x_points = 8, num_y_points = 8, num_z_points = 8):
+    """crerates the points for the cube colored along the axis where:
+    x->red, y->green, z->b
+    x, y, z axis are limited to >0 <=1"""
     points = []
 
     x_points = np.arange(0, 1, 1/num_x_points)
@@ -30,19 +30,20 @@ def get_points_cube(num_x_points = 8, num_y_points = 8, num_z_points = 8):
                 b = int(z * 255.0)
                 a = 255
 
-                rgb = struct.unpack('I', struct.pack('BBBB', b, g, r, a))[0]
+                rgb = pack_colors(r,g,b,a)
                 pt = [x, y, z, rgb]
                 points.append(pt)
     return points
 
 def get_pc2_message_cube():
+    """creates a message using points from get_points_cube"""
     header = Header()
     header.frame_id = "map"
     points = get_points_cube(4, 5, 6)
     fields = get_fields()
 
-    message = point_cloud2.create_cloud(header, fields, points)
-    return message
+    pc2_message = point_cloud2.create_cloud(header, fields, points)
+    return pc2_message
 
 if __name__ == "__main__":
     rospy.init_node("dynamic_pc2_node")

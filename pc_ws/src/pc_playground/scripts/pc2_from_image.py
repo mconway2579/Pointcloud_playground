@@ -1,27 +1,35 @@
 #!/usr/bin/env python
+"""ros node that converts rep118 depth images to point clouds colored along axis"""
+import math
 import rospy
-import struct
 
 from roslib import message
 
-import sensor_msgs.point_cloud2 as pc2
-from sensor_msgs.msg import PointCloud2, PointField
-
-from std_msgs.msg import Header
+from sensor_msgs.msg import PointCloud2
 from sensor_msgs import point_cloud2
 
+from std_msgs.msg import Header
+
 import cv2 as cv
-from shared import get_fields
+from shared import get_fields, pack_colors
 
-import math
 
-def get_points_from_depth_img_path(depth_image_path, z_start = 0, z_end_offset = 0, x_start = 0, x_end_offset = 0):
+def get_points_from_depth_img_path(depth_image_path,
+                                  z_start = 0, z_end_offset = 0,
+                                  x_start = 0, x_end_offset = 0):
+    """given a path to a rep118 depth image read it with open cv
+     pass the np_array to the get points function"""
     depth_image = cv.imread(depth_image_path)
     gray = cv.cvtColor(depth_image, cv.COLOR_BGR2GRAY)
-    return get_points_from_depth_img(gray, z_start = z_start, z_end_offset = z_end_offset, x_start = x_start, x_end_offset = x_end_offset)
+    return get_points_from_depth_img(gray,
+                                    z_start = z_start, z_end_offset = z_end_offset,
+                                    x_start = x_start, x_end_offset = x_end_offset)
 
-def get_points_from_depth_img(depth_image, z_start = 0, z_end_offset = 0, x_start = 0, x_end_offset = 0):
-
+def get_points_from_depth_img(depth_image,
+                            z_start = 0, z_end_offset = 0,
+                            x_start = 0, x_end_offset = 0):
+    """given a np_array containing a rep118 depth image
+    create points in the image colored by axis"""
     points = []
 
     for z in range(z_start, len(depth_image)-z_end_offset):
@@ -36,7 +44,7 @@ def get_points_from_depth_img(depth_image, z_start = 0, z_end_offset = 0, x_star
             g = int(y_coord * 255.0)
             b = int(z_coord * 255.0)
             a = 255
-            rgb = struct.unpack('I', struct.pack('BBBB', b, g, r, a))[0]
+            rgb = pack_colors(r,g,b,a)
 
             pt = [x_coord, y_coord, z_coord, rgb]
             points.append(pt)
@@ -44,15 +52,16 @@ def get_points_from_depth_img(depth_image, z_start = 0, z_end_offset = 0, x_star
     return points
 
 def get_pc2_message_from_depth_image_path(depth_image_path):
+    """ given a path to a rep118 depth image return a pc2 message created from the depth image"""
     header = Header()
     header.frame_id = "map"
     points = get_points_from_depth_img_path(depth_image_path)
     fields = get_fields()
 
-    message = point_cloud2.create_cloud(header, fields, points)
+    pc2_message = point_cloud2.create_cloud(header, fields, points)
 
 
-    return message
+    return pc2_message
 
 
 if __name__ == "__main__":
